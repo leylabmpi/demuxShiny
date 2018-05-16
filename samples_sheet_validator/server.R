@@ -1,10 +1,13 @@
 library(shiny)
+source("../utils/io.R")
+source("../utils/format.R")
 
 call_script = function(script_path, input){
   if(is.null(input$samples_sheet_file)){
     options = c('-h')
   } else {
     options = c(
+      rename_tmp_file(input$SetupFile),
       c('--seq-tech', add_quotes(input$seq_tech))
     )
   }
