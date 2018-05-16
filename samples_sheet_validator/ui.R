@@ -13,10 +13,13 @@ shinyUI(fluidPage(
                   choices = c('HiSeq' = 'HiSeq',
                               'MiSeq' = 'MiSeq'),
                   selected = 'HiSeq'),
-      h4('Run the validation'),
-      actionButton("runBtn", "Validate")
+      h5('Run the validation'),
+      actionButton("runBtn", "Validate Samples Sheet"),
+      hr(),
+      h6('For problems, contact Nick Youngblut (nyoungblut@tuebingen.mpg.de)')
     ),
     mainPanel(
+      h4('Validator script output'),
       verbatimTextOutput('script_out')
     )
   )

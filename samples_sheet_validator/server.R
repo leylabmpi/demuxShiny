@@ -16,9 +16,13 @@ shinyServer(function(input, output, session) {
   script_path = './samples_sheet_validator.py'
   
   # calling script
-  script_out = observeEvent(input$runBtn, {
-    print('running')
+  script_out = eventReactive(input$runBtn, {
     # run command 
     call_script(script_path, input)
+  })
+  
+  # adding script output to output
+  output$script_out = reactive({
+    paste(script_out(), collapse='\n')
   })
 })
