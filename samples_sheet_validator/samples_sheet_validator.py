@@ -223,7 +223,7 @@ def main(args):
     validate_path(args.samples_sheet)
     sheet = read_samples_sheet(args.samples_sheet)
     validate_samples_sheet(sheet, args.seq_tech)
-
+    print('SUCCESS! The samples sheet is validated!')
 
 if __name__ == '__main__':
     args = parser.parse_args()
