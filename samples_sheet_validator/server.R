@@ -7,11 +7,10 @@ call_script = function(script_path, input){
     options = c('-h')
   } else {
     options = c(
-      rename_tmp_file(input$SetupFile),
+      rename_tmp_file(input$samples_sheet_file),
       c('--seq-tech', add_quotes(input$seq_tech))
     )
   }
-  options = paste(c(options), collapse=' ')
   system2(script_path, options, stdout=TRUE, stderr=TRUE)
 }
 

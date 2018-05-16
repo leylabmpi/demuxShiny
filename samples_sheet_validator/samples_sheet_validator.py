@@ -14,7 +14,7 @@ epi = """DESCRIPTION:
 """
 parser = argparse.ArgumentParser(description=desc, epilog=epi,
                                  formatter_class=argparse.RawTextHelpFormatter)
-parser.add_argument('samples_sheet', metavar='samples sheet', type=str,
+parser.add_argument('samples_sheet', metavar='samples_sheet', type=str,
                     help='Samples sheet file path')
 parser.add_argument('-s', '--seq-tech', type=str, default='HiSeq',
                     choices=['HiSeq', 'MiSeq'],
