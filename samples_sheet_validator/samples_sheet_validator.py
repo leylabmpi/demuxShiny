@@ -117,7 +117,7 @@ def header_schema():
     """
     s = [{Optional('IEMFileVersion') : '4'},
          {Optional('Experiment Name') : str},
-         {Optional('Date') : Regex(r'\d{4}-\d{2}-\d{2}')},
+         {Optional('Date') : Regex(r'\d{1,2}\/\d{1,2}\/20\d{2}')},
          {'Workflow': Or('GenerateFASTQ', 'GenerateChromiumFASTQ')},
          {Optional('Application') : str},
          {Optional('Assay') : str},
