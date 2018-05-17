@@ -32,8 +32,8 @@ class Parser(object):
         """Parsing parameter-formatted sections
         """
         if x.endswith(';'):
-            msg = 'ERROR in Line {}: the csv should be comma-delimited, not semicolon-delimited. Line content "{}"'
-            print(msg.format(line, x))
+            msg = 'ERROR: the csv should be comma-delimited, not semicolon-delimited. Line content: "{}"'
+            print(msg.format(x))
             sys.exit(1)
         x = x.split(',')
         if len(x) < 2:
@@ -161,7 +161,8 @@ def data_schema(seq_tech):
          Optional('I5_Index_ID') : Or('', rgx),
          Optional('index2') : Or('', idx_rgx)}
     if seq_tech.lower() == 'hiseq':
-        s['Lane'] = str
+        lane_rgx = Regex(r'^[1-8]$')
+        s['Lane'] = lane_rgx
     return(Schema([s]))
 
 def unique_values(rows, idx):
