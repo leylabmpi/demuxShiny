@@ -1,7 +1,7 @@
 [Header],,,,,,,,
 IEMFileVersion,4,,,,,,,
 Experiment Name,run91,,,,,,,
-Date,,,,,,,,
+Date,2018-01-01,,,,,,,
 Workflow,GenerateChromiumFASTQ,,,,,,,
 Application,10X Supernova,,,,,,,
 Assay,10X Chromium,,,,,,,

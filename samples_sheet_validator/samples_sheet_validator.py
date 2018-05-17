@@ -18,7 +18,7 @@ parser.add_argument('samples_sheet', metavar='samples_sheet', type=str,
                     help='Samples sheet file path')
 parser.add_argument('-s', '--seq-tech', type=str, default='HiSeq',
                     choices=['HiSeq', 'MiSeq'],
-                    help='Sequencing technology (default: %(default)s')
+                    help='Sequencing technology (default: %(default)s)')
 parser.add_argument('--version', action='version', version='0.0.1')
 
 
@@ -31,6 +31,10 @@ class Parser(object):
     def parse_params(self, x, line):
         """Parsing parameter-formatted sections
         """
+        if x.endswith(';'):
+            msg = 'ERROR in Line {}: the csv should be comma-delimited, not semicolon-delimited. Line content "{}"'
+            print(msg.format(line, x))
+            sys.exit(1)
         x = x.split(',')
         if len(x) < 2:
             x.append('')
@@ -57,6 +61,13 @@ class Parser(object):
             return z
         return None
 
+    def warn_extra(self, x, line):
+        """Warning that there is content in the '[Extra]' key
+        """
+        x = x.split(',')
+        msg = 'WARNING: extra content detected at line {}: {}'.format(line,x)
+        print(msg)
+
 def read_samples_sheet(path):
     """Reading in the Sample Sheet.
     path : path to Sample Sheet file
@@ -65,7 +76,8 @@ def read_samples_sheet(path):
     sections = {'[Header]' : P.parse_params,
                 '[Reads]' : P.parse_params,
                 '[Settings]' : P.parse_params,
-                '[Data]' : P.parse_table}
+                '[Data]' : P.parse_table,
+                '[Extra]' : P.warn_extra}
 
     sheet = OrderedDict()
     with open(path) as inF:
@@ -78,6 +90,10 @@ def read_samples_sheet(path):
                 section = line
             else:
                 if line.startswith('['):
+                    if line.endswith(';'):
+                        msg = 'ERROR in Line {}: the csv should be comma-delimited, not semicolon-delimited'
+                        print(msg.format(line))
+                        sys.exit(1)
                     msg = 'WARNING in Line {}: line starts with "["'
                     msg += ', but {} is not a valid section ID'
                     print(msg.format(i, line))
