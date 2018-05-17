@@ -91,7 +91,7 @@ def read_samples_sheet(path):
             else:
                 if line.startswith('['):
                     if line.endswith(';'):
-                        msg = 'ERROR in Line {}: the csv should be comma-delimited, not semicolon-delimited'
+                        msg = 'ERROR: the csv should be comma-delimited, not semicolon-delimited.'
                         print(msg.format(line))
                         sys.exit(1)
                     msg = 'WARNING in Line {}: line starts with "["'
