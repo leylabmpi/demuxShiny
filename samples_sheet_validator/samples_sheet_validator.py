@@ -170,6 +170,7 @@ def unique_values(rows, idx):
         except KeyError:
             msg = 'ERROR in table row {}: "{}" key not found'
             print(msg.format(i, idx))
+            continue
         try:
             cnt[value] += 1
         except KeyError:
